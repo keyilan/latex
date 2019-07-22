@@ -1,0 +1,58 @@
+% don't forget to use XeLaTeX and appropriate fonts
+
+\documentclass[10pt]{article}
+\usepackage{calculator}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{pgfplots}
+\begin{document}
+
+% bounds
+\def \xmin {100}
+\def \xmax {2100}
+\def \ymin {240}
+\def \ymax {840}
+% calculations
+\SUBTRACT{\xmax}{\xmin}{\xdif} % xdif
+\SUBTRACT{\ymax}{\ymin}{\ydif} % ydif
+\DIVIDE{\ydif}{3}{\ythird}
+\ADD{\ythird}{\ymin}{\yone}
+\MULTIPLY{\ythird}{2}{\ytwothird}
+\ADD{\ytwothird}{\ymin}{\ytwo}
+% figure
+\begin{figure}[]
+	\begin{tikzpicture}
+		\begin{axis}[
+			xmin=\xmin-5,
+			xmax=\xmax+5,
+			ymin=\ymin-5,
+			ymax=\ymax+5,
+			axis line style={draw=none},
+			tick style={draw=none},
+			yticklabels={,,},
+			xticklabels={,,},
+			x dir=reverse,
+			y dir=reverse
+		]
+			\draw [line width=0.25mm, black] (axis cs:\xmin, \ymin) -- (axis cs:\xmin, \ymax); % box
+			\draw [line width=0.25mm, black] (axis cs:\xmin, \ymin) -- (axis cs:\xmax, \ymin); % box
+			\draw [line width=0.25mm, black] (axis cs:\xmin, \ymax) -- (axis cs:\xdif/2, \ymax); % box
+			\draw [line width=0.25mm, black] (axis cs:\xmax, \ymin) -- (axis cs:\xdif/2, \ymax); % box
+			\draw [line width=0.25mm, black] (axis cs:\xdif/2, \ymin) -- (axis cs:\xdif/4, \ymax); % vert
+			\draw [line width=0.25mm, black] (axis cs:\xmin, \yone) -- (axis cs:\xmax*.83, \yone); % horiz
+			\draw [line width=0.25mm, black] (axis cs:\xmin, \ytwo) -- (axis cs:\xmax*.66, \ytwo); % horiz
+			
+			\node[label={180:{a}},circle,fill,inner sep=2pt] at (axis cs:650.886, 810.603) {}; % a
+			\node[label={180:{o}},circle,fill,inner sep=2pt] at (axis cs:235.0359, 487.9435) {}; % o
+			\node[label={180:{i}},circle,fill,inner sep=2pt] at (axis cs:1882.3677, 275.0268) {}; % i
+			\node[label={180:{ɨ}},circle,fill,inner sep=2pt] at (axis cs:1359.574, 273.267) {}; % ɯ
+			\node[label={180:{ɤ}},circle,fill,inner sep=2pt] at (axis cs:982.281, 417.858) {}; % ɤ
+			\node[label={180:{ə}},circle,fill,inner sep=2pt] at (axis cs:800.693, 589.351) {}; % ə
+			\node[label={180:{e}},circle,fill,inner sep=2pt] at (axis cs:1563.256, 419.976) {}; % e
+			\node[label={180:{ʊ}},circle,fill,inner sep=2pt] at (axis cs:426.0742, 350.51) {}; % u
+			\node[label={180:{ɔ}},circle,fill,inner sep=2pt] at (axis cs:345.068, 641.492) {}; % ɔ
+		\end{axis}
+	\end{tikzpicture}
+\end{figure}
+
+\end{document}
